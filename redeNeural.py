@@ -44,14 +44,6 @@ class classificador(nn.Module):
     self.bnorm = nn.BatchNorm2d(num_features=64)
     self.pool = nn.MaxPool2d(kernel_size=(2,2))
     self.flatten = nn.Flatten()
-
-    # output = (input - filter + 1) / stride
-    # Convolução 1 -> (64 - 3 + 1) / 1 = 62x62
-    # Pooling 1 -> Só dividir pelo kernel_size = 31x31
-    # Convolução 2 -> (31 - 3 + 1)/ 1 = 29x29
-    # Pooling 2 -> Só dividir pelo kernel_size = 14x14
-    # 14 * 14 * 64
-    # 33907200 valores -> 256 neurônios da camada oculta
     self.linear1 = nn.Linear(in_features=14*14*64, out_features=256)
     self.linear2 = nn.Linear(256, 128)
     self.output = nn.Linear(128, 3)
